@@ -9,18 +9,17 @@ use League\OAuth2\Client\Tool\ArrayAccessorTrait;
 
 class EgnyteResourceOwner implements ResourceOwnerInterface
 {
-
     use ArrayAccessorTrait;
-    
+
     /**
      * Raw response
      *
      * @var array
      */
     protected $response;
-    
+
     /**
-     * 
+     *
      * @param array $response
      */
     public function __construct(array $response = [])
@@ -29,7 +28,7 @@ class EgnyteResourceOwner implements ResourceOwnerInterface
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \League\OAuth2\Client\Provider\ResourceOwnerInterface::getId()
      */
@@ -42,9 +41,9 @@ class EgnyteResourceOwner implements ResourceOwnerInterface
     {
         return $this->getValueByKey($this->response, 'username');
     }
-    
+
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \League\OAuth2\Client\Provider\ResourceOwnerInterface::toArray()
      */

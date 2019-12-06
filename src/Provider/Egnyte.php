@@ -14,11 +14,9 @@ class Egnyte extends AbstractProvider
 {
     use BearerAuthorizationTrait;
 
-    const PATH_TOKEN = '/puboauth/token';
-    const PATH_USERINFO = '/pubapi/v1/userinfo';
-    const DEFAULT_EXPIRES_IN = 1296000;
-
-    public $_baseUrl;
+    public const PATH_TOKEN = '/puboauth/token';
+    public const PATH_USERINFO = '/pubapi/v1/userinfo';
+    public const DEFAULT_EXPIRES_IN = 1296000;
 
     /**
      * @param array $options
@@ -90,7 +88,7 @@ class Egnyte extends AbstractProvider
      * @see \League\OAuth2\Client\Provider\AbstractProvider::getBaseAccessTokenUrl()
      */
     public function getBaseAccessTokenUrl(array $params)
-    {        
+    {
         return 'https://' . $this->domain . '.egnyte.com' . self::PATH_TOKEN;
     }
 
@@ -126,12 +124,12 @@ class Egnyte extends AbstractProvider
     {
         if (isset($data['error'])) {
             $message = $data['error_description'] ?? $data['error'];
-            throw new IdentityProviderException($message, $response->getStatusCode(), $response);           
+            throw new IdentityProviderException($message, $response->getStatusCode(), $response);
         }
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \League\OAuth2\Client\Provider\AbstractProvider::getResourceOwnerDetailsUrl()
      */
@@ -163,7 +161,7 @@ class Egnyte extends AbstractProvider
     protected function prepareAccessTokenResponse(array $result)
     {
         $response = parent::prepareAccessTokenResponse($result);
-        if($response['expires_in'] == -1) {
+        if ($response['expires_in'] == -1) {
             $response['expires_in'] = self::DEFAULT_EXPIRES_IN;
         }
         return $response;
